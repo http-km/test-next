@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "build-css": "cross-env NODE_ENV=production tailwindcss build app.css -o styles.css",
+    "dev-css": "cross-env NODE_ENV=development tailwindcss build app.css -o styles.css",
+    "next-dev": "next dev",
+    "dev": "concurrently \"npm run dev-css\" \"npm run next-dev\" ",
+    "next-build":"next build",
+    "next-export":"next export",
+    "build": "concurrently \"npm run build-css\" \"npm run next-build\" ",
     "start": "next start"
   },
   "dependencies": {
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
     "next": "9.4.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "tailwindcss": "^1.4.6"
   }
 }
